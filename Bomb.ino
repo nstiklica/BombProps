@@ -1,9 +1,12 @@
-void setup() {
-  // put your setup code here, to run once:
+#include "BombStates.h"
+#include "BasicBombGame.h"
 
+BasicBombGame bomb;
+
+void setup() {
+    bomb.begin();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+    bomb.update();
 }
