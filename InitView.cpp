@@ -6,7 +6,7 @@ InitView::InitView(void (*stateChangeCallback)(BombState))
 void InitView::render() {
     drawInfoSection("To Arm Press", ST77XX_WHITE, ST77XX_BLUE);
     drawMainSection("A", ST77XX_WHITE, ST77XX_BLACK);
-    drawControlSection("", ST77XX_WHITE, ST77XX_BLACK);
+    drawControlSection("| (B)ack |     | (A)rm |", ST77XX_WHITE, ST77XX_BLACK);
 }
 
 void InitView::handleInput(char key) {
