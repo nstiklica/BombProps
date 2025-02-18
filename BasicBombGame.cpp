@@ -5,8 +5,15 @@ BaseView* BasicBombGame::currentView = nullptr;
 char BasicBombGame::bombCode[7] = "000000";
 KeypadModule* BasicBombGame::keypad = nullptr;
 
+//Timer
+int BasicBombGame::minutes = 30;
+int BasicBombGame::seconds = 0;
+unsigned long BasicBombGame::lastUpdateTime = 0;
+
 byte rowPins[4] = {9, 8, 7, 6};
 byte colPins[4] = {5, 4, 3, 2};
+
+bool BasicBombGame::renderTime = false;
 
 BasicBombGame::BasicBombGame() {}
 
@@ -20,10 +27,19 @@ void BasicBombGame::begin() {
 }
 
 void BasicBombGame::update() {
-   char key = keypad->getKey();  // ✅ Read key input
-    if (key && currentView) {
-        currentView->handleInput(key);  // ✅ Send key input to current view
+
+  char key = keypad->getKey();
+  if (key && currentView) {
+    currentView->handleInput(key);
+  }
+
+  if (currentState == BombState::ARMED || currentState == BombState::DISARMING) {
+    updateCountdown();
+    if(renderTime){
+          currentView->refresh();
+          renderTime = false;
     }
+  }
 }
 
 void BasicBombGame::changeState(BombState newState) {
@@ -42,7 +58,7 @@ void BasicBombGame::changeState(BombState newState) {
       currentView = new ArmingView(changeState, setBombCode);
       break;
     case BombState::ARMED:
-      // currentView = new ArmedView([this](BombState newState) { changeState(newState); });
+      currentView = new ArmedView(changeState);
       break;
     case BombState::DISARMING:
       // currentView = new DisarmView([this](BombState newState) { changeState(newState); });
@@ -68,4 +84,24 @@ void BasicBombGame::setBombCode(const char* code) {
 
 const char* BasicBombGame::getBombCode() {
   return bombCode;
+}
+
+void BasicBombGame::updateCountdown() {
+  if (millis() - lastUpdateTime >= 1000) {
+    lastUpdateTime = millis();
+
+    if (seconds == 0) {
+      if (minutes > 0) {
+        minutes--;
+        seconds = 59;
+      }
+    } else {
+      seconds--;
+      renderTime = true;
+    }
+
+    if (minutes == 0 && seconds == 0) {
+      changeState(BombState::EXPLODED);
+    }
+  }
 }

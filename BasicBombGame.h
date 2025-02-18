@@ -6,21 +6,33 @@
 #include "BaseView.h"
 #include "InitView.h"
 #include "ArmingView.h"
+#include "ArmedView.h"
 
 class BasicBombGame {
-public:
+  public:
     BasicBombGame();
+
     void begin();
     void update();
+
     static void changeState(BombState newState);
+    static void updateCountdown();
+
     static void setBombCode(const char* code);
-    static const char* getBombCode(); 
-    
-private:
+    static const char* getBombCode();
+
+    //Timer
+    static int minutes;
+    static int seconds;
+    static unsigned long lastUpdateTime;
+
+  private:
     static BombState currentState;
     static BaseView* currentView;
     static char bombCode[7];
     static KeypadModule* keypad;
+
+    static bool renderTime;
 };
 
 #endif
