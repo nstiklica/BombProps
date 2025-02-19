@@ -7,6 +7,7 @@
 #include "InitView.h"
 #include "ArmingView.h"
 #include "ArmedView.h"
+#include "DisarmView.h"
 
 class BasicBombGame {
   public:
@@ -20,6 +21,9 @@ class BasicBombGame {
 
     static void setBombCode(const char* code);
     static const char* getBombCode();
+
+    static int getMinutes();
+    static int getSeconds();
 
     //Timer
     static int minutes;

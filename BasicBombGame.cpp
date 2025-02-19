@@ -35,9 +35,9 @@ void BasicBombGame::update() {
 
   if (currentState == BombState::ARMED || currentState == BombState::DISARMING) {
     updateCountdown();
-    if(renderTime){
-          currentView->refresh();
-          renderTime = false;
+    if (renderTime) {
+      currentView->refresh();
+      renderTime = false;
     }
   }
 }
@@ -61,7 +61,7 @@ void BasicBombGame::changeState(BombState newState) {
       currentView = new ArmedView(changeState);
       break;
     case BombState::DISARMING:
-      // currentView = new DisarmView([this](BombState newState) { changeState(newState); });
+       currentView = new DisarmView(changeState);
       break;
     case BombState::DISARMED:
       // currentView = new DisarmedView([this](BombState newState) { changeState(newState); });
@@ -74,6 +74,14 @@ void BasicBombGame::changeState(BombState newState) {
   if (currentView) {
     currentView->render();
   }
+}
+
+int BasicBombGame::getMinutes() {
+  return minutes;
+}
+
+int BasicBombGame::getSeconds() {
+  return seconds;
 }
 
 void BasicBombGame::setBombCode(const char* code) {

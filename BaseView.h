@@ -20,7 +20,7 @@ class BaseView {
     static Adafruit_ST7735* screen;
     void (*stateChangeCallback)(BombState);
 
-    void drawInfoSection(const char* text, uint16_t textColor, uint16_t bgColor);
+    virtual void drawInfoSection(const char* text, uint16_t textColor, uint16_t bgColor);
     virtual void drawMainSection(const char* content, uint16_t textColor, uint16_t bgColor);
     void drawControlSection(const char* controls, uint16_t textColor, uint16_t bgColor);
 
