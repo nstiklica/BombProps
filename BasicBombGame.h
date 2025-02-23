@@ -8,6 +8,7 @@
 #include "ArmingView.h"
 #include "ArmedView.h"
 #include "DisarmView.h"
+#include "SuccessView.h"
 
 class BasicBombGame {
   public:

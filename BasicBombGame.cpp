@@ -64,7 +64,7 @@ void BasicBombGame::changeState(BombState newState) {
        currentView = new DisarmView(changeState);
       break;
     case BombState::DISARMED:
-      // currentView = new DisarmedView([this](BombState newState) { changeState(newState); });
+      currentView = new SuccessView(changeState);
       break;
     case BombState::EXPLODED:
       // currentView = new ExplodedView([this](BombState newState) { changeState(newState); });
