@@ -1,16 +1,29 @@
 #include "InitView.h"
 
 InitView::InitView(void (*stateChangeCallback)(BombState))
-    : BaseView(stateChangeCallback) {}
+  : BaseView(stateChangeCallback) {}
 
 void InitView::render() {
-    drawInfoSection("To Arm Press", ST77XX_WHITE, ST77XX_BLUE);
-    drawMainSection("A", ST77XX_WHITE, ST77XX_BLACK);
-    drawControlSection("| (B)ack |     | (A)rm |", ST77XX_WHITE, ST77XX_BLACK);
+  screen->fillScreen(ST77XX_BLACK);
+  drawInfoSection("Select Mode", ST77XX_WHITE, ST77XX_BLUE);
+  drawMainSection("(1) 5 mins\n----------\n(2) 30 mins", ST77XX_WHITE, ST77XX_BLACK);
+  drawControlSection("Press (1) or (2)", ST77XX_WHITE, ST77XX_BLACK);
+}
+
+void InitView::drawMainSection(const char* content, uint16_t textColor, uint16_t bgColor) {
+  screen->setTextSize(2);
+  screen->setTextColor(textColor);
+  screen->setCursor(0, 45);
+  screen->print(content);
 }
 
 void InitView::handleInput(char key) {
-    if (key == 'A') {
-        stateChangeCallback(BombState::ARMING);
-    }
+  if (key == '1') {
+    BasicBombGame::setTime(0 , 5);
+    stateChangeCallback(BombState::ARMING);
+  }
+  else if (key == '2') {
+    BasicBombGame::setTime(0 , 30);
+    stateChangeCallback(BombState::ARMING);
+  }
 }

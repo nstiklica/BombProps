@@ -13,6 +13,7 @@
 class BasicBombGame {
   public:
     BasicBombGame();
+    BasicBombGame(int _seconds, int _minutes);
 
     void begin();
     void update();
@@ -23,6 +24,7 @@ class BasicBombGame {
     static void setBombCode(const char* code);
     static const char* getBombCode();
 
+    static void setTime(int _seconds, int _minutes);
     static int getMinutes();
     static int getSeconds();
 

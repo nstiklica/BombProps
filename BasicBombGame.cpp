@@ -1,6 +1,6 @@
 #include "BasicBombGame.h"
 
-BombState BasicBombGame::currentState = BombState::ARMING;
+BombState BasicBombGame::currentState = BombState::INIT;
 BaseView* BasicBombGame::currentView = nullptr;
 char BasicBombGame::bombCode[7] = "000000";
 KeypadModule* BasicBombGame::keypad = nullptr;
@@ -17,12 +17,14 @@ bool BasicBombGame::renderTime = false;
 
 BasicBombGame::BasicBombGame() {}
 
+BasicBombGame::BasicBombGame(int _seconds, int _minutes) {
+    setTime(_seconds, _minutes);
+}
+
 void BasicBombGame::begin() {
   keypad = new KeypadModule(rowPins, colPins);
   keypad->begin();
-  // Initialize first view (InitView)
-  //currentView = new InitView(changeState);
-  currentView = new ArmingView(changeState, setBombCode);
+  currentView = new InitView(changeState);
   currentView->render();
 }
 
@@ -74,6 +76,11 @@ void BasicBombGame::changeState(BombState newState) {
   if (currentView) {
     currentView->render();
   }
+}
+
+void BasicBombGame::setTime(int _seconds, int _minutes) {
+    seconds = _seconds;
+    minutes = _minutes;
 }
 
 int BasicBombGame::getMinutes() {
