@@ -1,9 +1,7 @@
 #include "BasicBombGame.h"
 
-BombState BasicBombGame::currentState = BombState::INIT;
-BaseView* BasicBombGame::currentView = nullptr;
+BasicBombGameStates BasicBombGame::currentState = BasicBombGameStates::INIT;
 char BasicBombGame::bombCode[7] = "000000";
-KeypadModule* BasicBombGame::keypad = nullptr;
 
 //Timer
 int BasicBombGame::minutes = 30;
@@ -35,7 +33,7 @@ void BasicBombGame::update() {
     currentView->handleInput(key);
   }
 
-  if (currentState == BombState::ARMED || currentState == BombState::DISARMING) {
+  if (currentState == BasicBombGameStates::ARMED || currentState == BasicBombGameStates::DISARMING) {
     updateCountdown();
     if (renderTime) {
       currentView->refresh();
@@ -44,7 +42,7 @@ void BasicBombGame::update() {
   }
 }
 
-void BasicBombGame::changeState(BombState newState) {
+void BasicBombGame::changeState(BasicBombGameStates newState) {
   if (currentState == newState) return;
 
   // Delete current view and switch to the new state
@@ -53,22 +51,22 @@ void BasicBombGame::changeState(BombState newState) {
   currentState = newState;
 
   switch (newState) {
-    case BombState::INIT:
+    case BasicBombGameStates::INIT:
       currentView = new InitView(changeState);
       break;
-    case BombState::ARMING:
+    case BasicBombGameStates::ARMING:
       currentView = new ArmingView(changeState, setBombCode);
       break;
-    case BombState::ARMED:
+    case BasicBombGameStates::ARMED:
       currentView = new ArmedView(changeState);
       break;
-    case BombState::DISARMING:
+    case BasicBombGameStates::DISARMING:
        currentView = new DisarmView(changeState);
       break;
-    case BombState::DISARMED:
+    case BasicBombGameStates::DISARMED:
       currentView = new SuccessView(changeState);
       break;
-    case BombState::EXPLODED:
+    case BasicBombGameStates::EXPLODED:
       // currentView = new ExplodedView([this](BombState newState) { changeState(newState); });
       break;
   }
@@ -116,7 +114,7 @@ void BasicBombGame::updateCountdown() {
     }
 
     if (minutes == 0 && seconds == 0) {
-      changeState(BombState::EXPLODED);
+      changeState(BasicBombGameStates::EXPLODED);
     }
   }
 }

@@ -1,8 +1,8 @@
 #include "ArmingView.h"
 
-ArmingView::ArmingView(void (*stateChangeCallback)(BombState), void (*codeCallback)(const char*))
+ArmingView::ArmingView(void (*stateChangeCallback)(BasicBombGameStates), void (*codeCallback)(const char*))
     : BaseView(stateChangeCallback), codeCallback(codeCallback), codeIndex(0) {
-    memset(enteredCode, 0, sizeof(enteredCode));  // Initialize code buffer
+    memset(enteredCode, 0, sizeof(enteredCode));
 }
 
 void ArmingView::render() {
@@ -27,9 +27,9 @@ void ArmingView::handleInput(char key) {
         }
     } else if (key == 'C' && codeIndex == 6) { 
         codeCallback(enteredCode);
-        stateChangeCallback(BombState::ARMED);
+        stateChangeCallback(BasicBombGameStates::ARMED);
     } else if (key == 'B') { 
-        stateChangeCallback(BombState::INIT);
+        stateChangeCallback(BasicBombGameStates::INIT);
     }
 }
 

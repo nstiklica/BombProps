@@ -1,6 +1,6 @@
 #include "SuccessView.h"
 
-SuccessView::SuccessView(void (*stateChangeCallback)(BombState))
+SuccessView::SuccessView(void (*stateChangeCallback)(BasicBombGameStates))
     : BaseView(stateChangeCallback) {}
 
 void SuccessView::render() {
@@ -22,6 +22,6 @@ void SuccessView::refresh() {
 
 void SuccessView::handleInput(char key) {
     if (key == 'A') {
-        stateChangeCallback(BombState::INIT);
+        stateChangeCallback(BasicBombGameStates::INIT);
     }
 }

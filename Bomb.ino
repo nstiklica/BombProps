@@ -1,12 +1,14 @@
-#include "BombStates.h"
+#include "BombGame.h"
 #include "BasicBombGame.h"
 
-BasicBombGame bomb;
+
+BombGame* game;
 
 void setup() {
-    bomb.begin();
+    game = new BasicBombGame();
+    game->begin();
 }
 
 void loop() {
-    bomb.update();
+    game->update();
 }

@@ -1,6 +1,6 @@
 #include "DisarmView.h"
 
-DisarmView::DisarmView(void (*stateChangeCallback)(BombState))
+DisarmView::DisarmView(void (*stateChangeCallback)(BasicBombGameStates))
     : BaseView(stateChangeCallback), codeIndex(0) {
     memset(enteredCode, 0, sizeof(enteredCode));
 }
@@ -43,12 +43,12 @@ void DisarmView::handleInput(char key) {
         }
     } else if (key == 'C' && codeIndex == 6) {
         if (strcmp(enteredCode, BasicBombGame::getBombCode()) == 0) {
-            stateChangeCallback(BombState::DISARMED); 
+            stateChangeCallback(BasicBombGameStates::DISARMED); 
         } else {
             drawInfoSection("Wrong Code!", ST77XX_WHITE, ST77XX_RED);
         }
     } else if (key == 'B') { 
-        stateChangeCallback(BombState::ARMED);
+        stateChangeCallback(BasicBombGameStates::ARMED);
     }
 }
 

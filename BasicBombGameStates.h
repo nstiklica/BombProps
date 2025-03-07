@@ -1,7 +1,7 @@
 #ifndef BOMBSTATES_H
 #define BOMBSTATES_H
 
-enum class BombState {
+enum class BasicBombGameStates {
     INIT,
     ARMING,
     ARMED,

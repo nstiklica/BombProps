@@ -5,7 +5,7 @@
 
 class SuccessView : public BaseView {
 public:
-    SuccessView(void (*stateChangeCallback)(BombState));
+    SuccessView(void (*stateChangeCallback)(BasicBombGameStates));
 
     void render() override;
     void refresh() override;

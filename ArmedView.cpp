@@ -1,6 +1,6 @@
 #include "ArmedView.h"
 
-ArmedView::ArmedView(void (*stateChangeCallback)(BombState))
+ArmedView::ArmedView(void (*stateChangeCallback)(BasicBombGameStates))
   : BaseView(stateChangeCallback) {}
 
 void ArmedView::render() {
@@ -24,7 +24,7 @@ void ArmedView::refresh() {
 
 void ArmedView::handleInput(char key) {
   if (key == 'D') {
-    stateChangeCallback(BombState::DISARMING);
+    stateChangeCallback(BasicBombGameStates::DISARMING);
   }
 }
 

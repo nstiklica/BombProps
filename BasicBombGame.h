@@ -1,8 +1,8 @@
 #ifndef BASICBOMBGAME_H
 #define BASICBOMBGAME_H
 
-#include "KeypadModule.h"
-#include "BombStates.h"
+#include "BombGame.h"
+#include "BasicBombGameStates.h"
 #include "BaseView.h"
 #include "InitView.h"
 #include "ArmingView.h"
@@ -10,15 +10,15 @@
 #include "DisarmView.h"
 #include "SuccessView.h"
 
-class BasicBombGame {
+class BasicBombGame : public BombGame {
   public:
     BasicBombGame();
     BasicBombGame(int _seconds, int _minutes);
 
-    void begin();
-    void update();
+    void begin() override;
+    void update() override;
 
-    static void changeState(BombState newState);
+    static void changeState(BasicBombGameStates newState);
     static void updateCountdown();
 
     static void setBombCode(const char* code);
@@ -34,12 +34,9 @@ class BasicBombGame {
     static unsigned long lastUpdateTime;
 
   private:
-    static BombState currentState;
-    static BaseView* currentView;
     static char bombCode[7];
-    static KeypadModule* keypad;
-
     static bool renderTime;
+    static BasicBombGameStates currentState;
 };
 
 #endif

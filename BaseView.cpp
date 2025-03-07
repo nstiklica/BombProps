@@ -2,7 +2,7 @@
 
 Adafruit_ST7735* BaseView::screen = nullptr;
 
-BaseView::BaseView(void (*stateChangeCallback)(BombState))
+BaseView::BaseView(void (*stateChangeCallback)(BasicBombGameStates))
   : stateChangeCallback(stateChangeCallback) {
   if (screen == nullptr) {
     initializeScreen();

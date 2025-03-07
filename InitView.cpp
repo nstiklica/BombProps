@@ -1,6 +1,6 @@
 #include "InitView.h"
 
-InitView::InitView(void (*stateChangeCallback)(BombState))
+InitView::InitView(void (*stateChangeCallback)(BasicBombGameStates))
   : BaseView(stateChangeCallback) {}
 
 void InitView::render() {
@@ -20,10 +20,10 @@ void InitView::drawMainSection(const char* content, uint16_t textColor, uint16_t
 void InitView::handleInput(char key) {
   if (key == '1') {
     BasicBombGame::setTime(0 , 5);
-    stateChangeCallback(BombState::ARMING);
+    stateChangeCallback(BasicBombGameStates::ARMING);
   }
   else if (key == '2') {
     BasicBombGame::setTime(0 , 30);
-    stateChangeCallback(BombState::ARMING);
+    stateChangeCallback(BasicBombGameStates::ARMING);
   }
 }

@@ -5,7 +5,7 @@
 
 class ArmingView : public BaseView{
 public:
-    ArmingView(void (*stateChangeCallback)(BombState), void (*codeCallback)(const char*));
+    ArmingView(void (*stateChangeCallback)(BasicBombGameStates), void (*codeCallback)(const char*));
 
     void render() override;
     void handleInput(char key) override;

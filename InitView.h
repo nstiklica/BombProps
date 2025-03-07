@@ -6,7 +6,7 @@
 
 class InitView : public BaseView {
 public:
-    InitView(void (*stateChangeCallback)(BombState));
+    InitView(void (*stateChangeCallback)(BasicBombGameStates));
 
     void render() override;
     void handleInput(char key) override;

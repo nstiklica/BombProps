@@ -6,7 +6,7 @@
 
 class ArmedView : public BaseView {
   public:
-    ArmedView(void (*stateChangeCallback)(BombState));
+    ArmedView(void (*stateChangeCallback)(BasicBombGameStates));
 
     void updateCountdown();
     void render() override;

@@ -6,11 +6,11 @@
 #include <Adafruit_ST7735.h>
 #include <SPI.h>
 
-#include "BombStates.h"
+#include "BasicBombGameStates.h"
 
 class BaseView {
   public:
-    BaseView(void (*stateChangeCallback)(BombState));
+    BaseView(void (*stateChangeCallback)(BasicBombGameStates));
 
     virtual void render() = 0;
     virtual void refresh() {};
@@ -18,7 +18,7 @@ class BaseView {
 
   protected:
     static Adafruit_ST7735* screen;
-    void (*stateChangeCallback)(BombState);
+    void (*stateChangeCallback)(BasicBombGameStates);
 
     virtual void drawInfoSection(const char* text, uint16_t textColor, uint16_t bgColor);
     virtual void drawMainSection(const char* content, uint16_t textColor, uint16_t bgColor);

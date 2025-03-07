@@ -6,7 +6,7 @@
 
 class DisarmView : public BaseView {
 public:
-    DisarmView(void (*stateChangeCallback)(BombState));
+    DisarmView(void (*stateChangeCallback)(BasicBombGameStates));
 
     void render() override;
     void refresh() override;
