@@ -11,9 +11,9 @@ public:
     void handleInput(char key) override;
 
     private:
-    char enteredCode[7];  // Buffer for 6-digit code
+    char enteredCode[7];
     int codeIndex;
-    void (*codeCallback)(const char*);  // ✅ Callback to store the code
+    void (*codeCallback)(const char*); 
 
     void updateCodeDisplay();
 };
