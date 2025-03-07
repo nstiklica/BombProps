@@ -6,9 +6,7 @@ KeypadModule::KeypadModule(byte* rowPins, byte* colPins) {
     keypad = new Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 }
 
-void KeypadModule::begin(){
-    //Some initialization logic if needed
-}
+void KeypadModule::begin(){}
 
 char KeypadModule::getKey(){
     return keypad->getKey();

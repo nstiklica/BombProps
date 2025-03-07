@@ -11,6 +11,7 @@
 class BaseView {
   public:
     BaseView(void (*stateChangeCallback)(BasicBombGameStates));
+    BaseView();
 
     virtual void render() = 0;
     virtual void refresh() {};

@@ -13,7 +13,6 @@
 class BasicBombGame : public BombGame {
   public:
     BasicBombGame();
-    BasicBombGame(int _seconds, int _minutes);
 
     void begin() override;
     void update() override;

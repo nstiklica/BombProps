@@ -9,6 +9,12 @@ BaseView::BaseView(void (*stateChangeCallback)(BasicBombGameStates))
   }
 }
 
+BaseView::BaseView() {
+  if (screen == nullptr) {
+    initializeScreen();
+  }
+}
+
 void BaseView::initializeScreen() {
   static Adafruit_ST7735 screenInstance(10, A1, A0);
 

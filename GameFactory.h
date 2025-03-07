@@ -12,7 +12,7 @@ enum class GameMode {
 
 class GameFactory {
 public:
-    static BombGame* createGame(GameMode mode);
+    static BombGame* createGame(int gameMode);
 };
 
 #endif
