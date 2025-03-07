@@ -8,25 +8,11 @@ int BasicBombGame::minutes = 30;
 int BasicBombGame::seconds = 0;
 unsigned long BasicBombGame::lastUpdateTime = 0;
 
-byte rowPins[4] = {9, 8, 7, 6};
-byte colPins[4] = {5, 4, 3, 2};
-
 bool BasicBombGame::renderTime = false;
 
 BasicBombGame::BasicBombGame() { }
 
-// BasicBombGame::BasicBombGame(int _seconds, int _minutes)
-// {
-//     setTime(_seconds, _minutes);
-// }
-
 void BasicBombGame::begin() {
-  if (!keypad) {
-    byte rowPins[4] = {9, 8, 7, 6};
-    byte colPins[4] = {5, 4, 3, 2};
-    keypad = new KeypadModule(rowPins, colPins);
-    keypad->begin();
-  }
   currentView = new InitView(changeState);
   currentView->render();
 }
