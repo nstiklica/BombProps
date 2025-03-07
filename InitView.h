@@ -5,7 +5,7 @@
 #include "BasicBombGame.h"
 
 class InitView : public BaseView {
-public:
+  public:
     InitView(void (*stateChangeCallback)(BasicBombGameStates));
 
     void render() override;

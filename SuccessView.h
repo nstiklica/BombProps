@@ -4,7 +4,7 @@
 #include "BaseView.h"
 
 class SuccessView : public BaseView {
-public:
+  public:
     SuccessView(void (*stateChangeCallback)(BasicBombGameStates));
 
     void render() override;

@@ -5,13 +5,13 @@
 #include "GameFactory.h"
 
 class InitializeGameView : public BaseView {
-    public:
-        InitializeGameView();
+  public:
+    InitializeGameView();
 
-        void render() override;
-        void handleInput(char key) override;
+    void render() override;
+    void handleInput(char key) override;
 
-        void drawMainSection(const char* content, uint16_t textColor, uint16_t bgColor) override;
+    void drawMainSection(const char* content, uint16_t textColor, uint16_t bgColor) override;
 };
 
 #endif

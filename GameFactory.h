@@ -6,12 +6,12 @@
 #include "ChessClockGame.h"
 
 enum class GameMode {
-    BASIC,
-    CHESS_CLOCK
+  BASIC,
+  CHESS_CLOCK
 };
 
 class GameFactory {
-public:
+  public:
     static BombGame* createGame(int gameMode);
 };
 

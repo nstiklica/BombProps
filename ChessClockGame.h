@@ -4,11 +4,11 @@
 #include "BombGame.h"
 
 class ChessClockGame : public BombGame {
-    public:
-        ChessClockGame();
+  public:
+    ChessClockGame();
 
-        void begin() override;
-        void update() override;
+    void begin() override;
+    void update() override;
 };
 
 #endif

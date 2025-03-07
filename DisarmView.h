@@ -5,14 +5,14 @@
 #include "BasicBombGame.h"
 
 class DisarmView : public BaseView {
-public:
+  public:
     DisarmView(void (*stateChangeCallback)(BasicBombGameStates));
 
     void render() override;
     void refresh() override;
     void handleInput(char key) override;
     void drawInfoSection(const char* text, uint16_t textColor, uint16_t bgColor) override;
-private:
+  private:
     char enteredCode[7];
     int codeIndex;
 

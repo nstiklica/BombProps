@@ -6,13 +6,13 @@
 #include "BaseView.h"
 
 class BombGame {
-public:
+  public:
     virtual void begin() = 0;
     virtual void update() = 0;
 
     void setKeypad(KeypadModule& keypadRef);
 
-protected:
+  protected:
     static KeypadModule* keypad;
     static BaseView* currentView;
 };

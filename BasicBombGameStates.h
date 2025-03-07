@@ -2,12 +2,12 @@
 #define BOMBSTATES_H
 
 enum class BasicBombGameStates {
-    INIT,
-    ARMING,
-    ARMED,
-    DISARMING,
-    DISARMED,
-    EXPLODED
+  INIT,
+  ARMING,
+  ARMED,
+  DISARMING,
+  DISARMED,
+  EXPLODED
 };
 
 #endif
