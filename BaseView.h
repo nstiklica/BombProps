@@ -5,6 +5,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_ST7735.h>
 #include <SPI.h>
+#include <Keypad.h>
 
 #include "BasicBombGameStates.h"
 
@@ -16,6 +17,7 @@ class BaseView {
     virtual void render() = 0;
     virtual void refresh() {};
     virtual void handleInput(char key) {};
+    virtual void handleInput(char key, KeyState keyboardState) {};
 
   protected:
     static Adafruit_ST7735* screen;
