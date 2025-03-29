@@ -96,7 +96,11 @@ void ChessClockView::drawSplitMainSection() {
 }
 
 void ChessClockView::handleInput(char key,  KeyState keyboardState) {
-  infoContent = "Handle input";
+
+  if(lastKey == '\0'){
+    lastKey = key;
+  }
+
   if (keyboardState == HOLD) {
     infoContent = "HOLD_";
 
@@ -107,31 +111,23 @@ void ChessClockView::handleInput(char key,  KeyState keyboardState) {
     auto timePassed = millis() - keyPressStartTime;
     if (timePassed > 3000) {
       infoContent += timePassed;
-      ActiveTeam team = getTeamForKey(key);
+      ActiveTeam team = getTeamForKey(lastKey);
       if (currentActiveTeam != team) {
         currentActiveTeam = team;
         ChessClockGame::switchTeam(currentActiveTeam);
       }
     }
+    return;
   }
   else if(keyboardState == IDLE	){
     infoContent = "IDLE_";
     lastKey = '\0';
     keyPressStartTime = 0;
-    return;
   }
 
   if (!key) {
-    infoContent = "No key pressed";
     return;
   }
-
-  // Only change the team if it has been held for 3 seconds
-  // ActiveTeam team = getTeamForKey(key);
-  // if (currentActiveTeam != team) {
-  //     currentActiveTeam = team;
-  //     ChessClockGame::switchTeam(currentActiveTeam);
-  // }
 }
 
 ActiveTeam ChessClockView::getTeamForKey(char key) {
