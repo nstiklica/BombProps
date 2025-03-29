@@ -8,15 +8,15 @@ ActiveTeam ChessClockView::currentActiveTeam = ActiveTeam::NONE;
 ChessClockView::ChessClockView() {}
 
 void ChessClockView::render() {
-  drawInfoSection("Team possesion", ST77XX_WHITE, ST77XX_BLACK);
+  drawInfoSection("", ST77XX_WHITE, ST77XX_BLACK);
   drawMainSection("", ST77XX_WHITE, ST77XX_BLACK);
   // drawControlSection("Choose color key", ST77XX_WHITE, ST77XX_BLACK);
 }
 
 void ChessClockView::refresh() {
-  drawInfoSection("Team possesion", ST77XX_WHITE, ST77XX_BLACK);
+  drawInfoSection("", ST77XX_WHITE, ST77XX_BLACK);
   drawMainSection("", ST77XX_WHITE, ST77XX_BLACK);
-  // drawControlSection("Choose color key", ST77XX_WHITE, ST77XX_BLACK);
+  drawControlSection("Choose color key", ST77XX_WHITE, ST77XX_BLACK);
 }
 
 void ChessClockView::drawMainSection(const char* content, uint16_t textColor, uint16_t bgColor) {
@@ -25,6 +25,7 @@ void ChessClockView::drawMainSection(const char* content, uint16_t textColor, ui
 
   if (activeTeam == ActiveTeam::NONE) {
     drawSplitMainSection();
+    infoContent = "";
     return;
   }
 
@@ -33,6 +34,7 @@ void ChessClockView::drawMainSection(const char* content, uint16_t textColor, ui
 
 void ChessClockView::drawInfoSection(const char* text, uint16_t textColor, uint16_t bgColor)
 {
+  if(infoContent == ""){ infoContent = "Control game";}
   screen->fillRect(0, 0, 160, 26, bgColor);
   screen->setTextSize(1);
   screen->setTextColor(textColor);
@@ -41,10 +43,9 @@ void ChessClockView::drawInfoSection(const char* text, uint16_t textColor, uint1
 }
 
 void ChessClockView::drawActiveTeamMainSection() {
-
   char activeTeamTimeStr[6];
   ActiveTeam activeTeam = ChessClockGame::getActiveTeam();
-  int16_t bgColor = 0;
+  int16_t bgColor = ST77XX_BLACK;
 
   if (activeTeam == ActiveTeam::BLUE) {
     snprintf(activeTeamTimeStr, sizeof(activeTeamTimeStr), "%d", ChessClockGame::getBlueTime());
@@ -55,12 +56,20 @@ void ChessClockView::drawActiveTeamMainSection() {
     bgColor = ST77XX_RED;
   }
 
-  screen->setTextSize(2);
-  screen->setTextColor(ST77XX_WHITE);
-  screen->setCursor(10, 50);
   screen->fillRect(0, 30, 160, 112, bgColor);
-  screen->print(activeTeamTimeStr);
+  screen->setTextSize(4);
 
+  int textLength = strlen(activeTeamTimeStr);
+  int charWidth = 6 * 4;
+  int charHeight = 8 * 4;
+
+  int totalWidth = textLength * charWidth;
+  int x = (160 - totalWidth) / 2;
+  int y = 20 + (112 - charHeight) / 2;
+
+  screen->setTextColor(ST77XX_WHITE);
+  screen->setCursor(x, y);
+  screen->print(activeTeamTimeStr);
 }
 
 void ChessClockView::drawSplitMainSection() {
@@ -76,7 +85,7 @@ void ChessClockView::drawSplitMainSection() {
 
   ActiveTeam activeTeam = ChessClockGame::getActiveTeam();
 
-  // Top half (Red Team)
+  // RED TEAM
   uint16_t redBgColor = (activeTeam == ActiveTeam::RED) ? ST77XX_WHITE : ST77XX_RED;
   uint16_t redTextColor = (activeTeam == ActiveTeam::RED) ? ST77XX_RED : ST77XX_WHITE;
   screen->fillRect(0, mainSectionY, screenWidth, halfHeight, redBgColor);
@@ -85,7 +94,7 @@ void ChessClockView::drawSplitMainSection() {
   screen->setCursor((screenWidth - 40) / 2, mainSectionY + (halfHeight / 2) - 8);
   screen->print(redTimeStr);
 
-  // Bottom half (Blue Team)
+  // BLUE TEAM
   uint16_t blueBgColor = (activeTeam == ActiveTeam::BLUE) ? ST77XX_WHITE : ST77XX_BLUE;
   uint16_t blueTextColor = (activeTeam == ActiveTeam::BLUE) ? ST77XX_BLUE : ST77XX_WHITE;
   screen->fillRect(0, mainSectionY + halfHeight, screenWidth, halfHeight, blueBgColor);
@@ -131,6 +140,9 @@ ActiveTeam ChessClockView::getTeamForKey(char key) {
   }
   else if (key == 'A' || key == 'B' || key == 'C' || key == 'D' || key == '#') {
     return ActiveTeam::RED;
+  }
+  else if(key == "*"){
+    return ActiveTeam::NONE;
   }
   return ActiveTeam::NONE;
 }
