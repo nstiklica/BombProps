@@ -102,31 +102,26 @@ void ChessClockView::handleInput(char key,  KeyState keyboardState) {
   }
 
   if (keyboardState == HOLD) {
-    infoContent = "HOLD_";
+    infoContent = "Taking control!";
 
     if (keyPressStartTime == 0) {
       keyPressStartTime = millis();
     }
 
     auto timePassed = millis() - keyPressStartTime;
-    if (timePassed > 3000) {
-      infoContent += timePassed;
+    if (timePassed > 2500) {
       ActiveTeam team = getTeamForKey(lastKey);
       if (currentActiveTeam != team) {
         currentActiveTeam = team;
         ChessClockGame::switchTeam(currentActiveTeam);
       }
     }
-    return;
+
   }
   else if(keyboardState == IDLE	){
-    infoContent = "IDLE_";
     lastKey = '\0';
     keyPressStartTime = 0;
-  }
-
-  if (!key) {
-    return;
+    infoContent = "";
   }
 }
 
