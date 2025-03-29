@@ -9,6 +9,9 @@ class KeypadModule {
     KeypadModule(byte* rowPins, byte* colPins);
     void begin();
     char getKey();
+    String getKeys();
+    KeyState getKeypadState();
+
 
   private:
     static const byte ROWS = 4;

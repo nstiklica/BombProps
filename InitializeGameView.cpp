@@ -9,7 +9,7 @@ InitializeGameView::InitializeGameView() : BaseView() {
 
 void InitializeGameView::render() {
   drawInfoSection("Game mode:", ST77XX_WHITE, ST77XX_BLUE);
-  drawMainSection("(1) plant and destroy\n------------------\n(2)chess game", ST77XX_WHITE, ST77XX_BLACK);
+  drawMainSection("(1) plant and destroy\n------------------\n(2) Control", ST77XX_WHITE, ST77XX_BLACK);
   drawControlSection("Press 1 or 2", ST77XX_WHITE, ST77XX_BLACK);
 }
 

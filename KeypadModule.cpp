@@ -13,3 +13,20 @@ void KeypadModule::begin() {
 char KeypadModule::getKey() {
   return keypad->getKey();
 }
+
+String KeypadModule::getKeys() {
+    String pressedKeys = "";
+    keypad->getKeys();
+
+    for (int i = 0; i < LIST_MAX; i++) {
+        if (keypad->key[i].kstate == PRESSED) {
+            pressedKeys += keypad->key[i].kchar;
+        }
+    }
+
+    return pressedKeys;
+}
+
+KeyState KeypadModule::getKeypadState(){
+  return keypad->getState();
+}
