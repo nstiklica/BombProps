@@ -5,7 +5,11 @@ char ChessClockView::lastKey = '\0';
 unsigned long ChessClockView::keyPressStartTime = 0;
 ActiveTeam ChessClockView::currentActiveTeam = ActiveTeam::NONE;
 
-ChessClockView::ChessClockView() {}
+ChessClockView::ChessClockView() 
+: m_horn(A5) 
+{
+  
+}
 
 void ChessClockView::render() {
   drawInfoSection("", ST77XX_WHITE, ST77XX_BLACK);
@@ -14,6 +18,7 @@ void ChessClockView::render() {
 }
 
 void ChessClockView::refresh() {
+  m_horn.update();
   drawInfoSection("", ST77XX_WHITE, ST77XX_BLACK);
   drawMainSection("", ST77XX_WHITE, ST77XX_BLACK);
   drawControlSection("Choose color key", ST77XX_WHITE, ST77XX_BLACK);
@@ -123,6 +128,7 @@ void ChessClockView::handleInput(char key,  KeyState keyboardState) {
       if (currentActiveTeam != team) {
         currentActiveTeam = team;
         ChessClockGame::switchTeam(currentActiveTeam);
+        m_horn.beep(3);
       }
     }
 

@@ -4,6 +4,7 @@
 #include "BaseView.h"
 #include "ChessClockGame.h"
 #include "ChessClockGameStates.h"
+#include "Horn.h"
 
 class ChessClockView : public BaseView {
 
@@ -28,6 +29,7 @@ class ChessClockView : public BaseView {
         static unsigned long keyPressStartTime;
         static ActiveTeam currentActiveTeam;
         String infoContent;
+        Horn m_horn;
 };
 
 #endif

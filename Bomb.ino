@@ -9,6 +9,10 @@ KeypadModule keypad(rowPins2, colPins2);
 BombGame* game;
 
 void setup() {
+
+  pinMode(A5, OUTPUT);
+  digitalWrite(A5, HIGH);
+
   keypad.begin();
 
   InitializeGameView initGameView;

@@ -16,6 +16,7 @@ class BaseView {
 
     virtual void render() = 0;
     virtual void refresh() {};
+    virtual void update() {};
     virtual void handleInput(char key) {};
     virtual void handleInput(char key, KeyState keyboardState) {};
 

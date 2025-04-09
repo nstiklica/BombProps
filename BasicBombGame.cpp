@@ -18,11 +18,12 @@ void BasicBombGame::begin() {
 }
 
 void BasicBombGame::update() {
-
   char key = keypad->getKey();
   if (key && currentView) {
     currentView->handleInput(key);
   }
+
+  currentView->update();
 
   if (currentState == BasicBombGameStates::ARMED || currentState == BasicBombGameStates::DISARMING) {
     updateCountdown();
