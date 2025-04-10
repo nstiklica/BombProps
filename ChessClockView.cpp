@@ -128,7 +128,10 @@ void ChessClockView::handleInput(char key,  KeyState keyboardState) {
       if (currentActiveTeam != team) {
         currentActiveTeam = team;
         ChessClockGame::switchTeam(currentActiveTeam);
-        m_horn.beep(3);
+        
+        if(currentActiveTeam != ActiveTeam::NONE){
+          m_horn.beep(3);
+        }
       }
     }
 
