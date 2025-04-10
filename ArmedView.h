@@ -3,6 +3,7 @@
 
 #include "BaseView.h"
 #include "BasicBombGame.h"
+#include "Horn.h"
 
 class ArmedView : public BaseView {
   public:
@@ -14,7 +15,9 @@ class ArmedView : public BaseView {
     void handleInput(char key) override;
 
     void drawMainSection(const char* content, uint16_t textColor, uint16_t bgColor) override;
+  
   private:
+    Horn m_horn;
 };
 
 #endif

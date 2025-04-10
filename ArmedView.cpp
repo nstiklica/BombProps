@@ -1,12 +1,12 @@
 #include "ArmedView.h"
 
 ArmedView::ArmedView(void (*stateChangeCallback)(BasicBombGameStates))
-  : BaseView(stateChangeCallback) {}
+  : BaseView(stateChangeCallback), m_horn(A5) {}
 
 void ArmedView::render() {
+  m_horn.beep(3);
   screen->fillScreen(ST77XX_BLACK);
   drawInfoSection("Bomb Armed!", ST77XX_WHITE, ST77XX_RED);
-
   char timeDisplay[6];
   snprintf(timeDisplay, sizeof(timeDisplay), "%02d:%02d", BasicBombGame::minutes, BasicBombGame::seconds);
   drawMainSection(timeDisplay, ST77XX_WHITE, ST77XX_BLACK);
@@ -15,6 +15,7 @@ void ArmedView::render() {
 }
 
 void ArmedView::refresh() {
+  m_horn.update();
   char timeDisplay[6];
   snprintf(timeDisplay, sizeof(timeDisplay), "%02d:%02d", BasicBombGame::minutes, BasicBombGame::seconds);
 
