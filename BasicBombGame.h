@@ -9,6 +9,7 @@
 #include "ArmedView.h"
 #include "DisarmView.h"
 #include "SuccessView.h"
+#include "ExplodedView.h"
 
 class BasicBombGame : public BombGame {
   public:

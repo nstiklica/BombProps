@@ -32,6 +32,10 @@ void BasicBombGame::update() {
       renderTime = false;
     }
   }
+
+  if(currentState == BasicBombGameStates::EXPLODED){
+    currentView->refresh();
+  }
 }
 
 void BasicBombGame::changeState(BasicBombGameStates newState) {
@@ -59,7 +63,7 @@ void BasicBombGame::changeState(BasicBombGameStates newState) {
       currentView = new SuccessView(changeState);
       break;
     case BasicBombGameStates::EXPLODED:
-      // currentView = new ExplodedView([this](BombState newState) { changeState(newState); });
+      currentView = new ExplodedView();
       break;
   }
 
