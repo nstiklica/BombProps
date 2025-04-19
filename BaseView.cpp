@@ -16,15 +16,12 @@ BaseView::BaseView() {
 }
 
 void BaseView::initializeScreen() {
-  static Adafruit_ST7735 screenInstance(10, A1, A0);
+  static Adafruit_ST7735 screenInstance(TFT_CS, TFT_A0, TFT_RESET);
 
   screen = &screenInstance;
   screen->initR(INITR_BLACKTAB);
   screen->setRotation(1);
   screen->fillScreen(ST77XX_BLACK);
-
-  pinMode(A2, OUTPUT);
-  digitalWrite(A2, HIGH); // Turn on backlight
 }
 
 void BaseView::drawInfoSection(const char* text, uint16_t textColor, uint16_t bgColor) {

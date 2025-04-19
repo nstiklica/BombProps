@@ -9,6 +9,10 @@
 
 #include "BasicBombGameStates.h"
 
+#define TFT_CS     10
+#define TFT_A0     8
+#define TFT_RESET  7 
+
 class BaseView {
   public:
     BaseView(void (*stateChangeCallback)(BasicBombGameStates));
